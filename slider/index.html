@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Slider</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slider-container {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.52, -0.25, 0.31, 1.64);
+            height: 100%;
+        }
+
+        .slide {
+            flex-shrink: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .slide img {
+            max-width: 100%;
+            height: auto;
+            position: relative;
+            z-index: -1;
+            filter: brightness(0.7);
+        }
+
+        .slide::before {
+            content: "";
+            background: url("image1.jpg") center/cover no-repeat;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.7;
+            z-index: -2;
+        }
+
+        .caption {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px;
+            color: white;
+        }
+
+        .prev-btn,
+        .next-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .prev-btn {
+            left: 10px;
+        }
+
+        .next-btn {
+            right: 10px;
+        }
+
+        .slide img {
+            max-width: 100%;
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            position: relative;
+            z-index: -1;
+            filter: brightness(0.7);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider">
+        <div class="slider-container">
+            <div class="slide">
+                <img src="slider-1.jpg" alt="Image 1">
+                <div class="caption">
+                    <h2>Title 1</h2>
+                    <p>Description for Image 1</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="slider-2.jpg" alt="Image 2">
+                <div class="caption">
+                    <h2>Title 2</h2>
+                    <p>Description for Image 2</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="slider-3.jpg" alt="Image 3">
+                <div class="caption">
+                    <h2>Title 3</h2>
+                    <p>Description for Image 3</p>
+                </div>
+            </div>
+        </div>
+        <button class="prev-btn">&#10094;</button>
+        <button class="next-btn">&#10095;</button>
+    </div>
+    <script>
+        const sliderContainer = document.querySelector('.slider-container');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        let currentIndex = 0;
+        let autoSlideInterval;
+
+        function showSlide(index) {
+            sliderContainer.style.transform = `translateX(-${index * 100}%)`;
+            currentIndex = index;
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            showSlide(currentIndex);
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            showSlide(currentIndex);
+        });
+
+        nextBtn.addEventListener('click', nextSlide);
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(nextSlide, 3000); // Change slide every 5 seconds
+        }
+
+        function stopAutoSlide() {
+            clearInterval(autoSlideInterval);
+        }
+
+        sliderContainer.addEventListener('mouseenter', stopAutoSlide);
+        sliderContainer.addEventListener('mouseleave', startAutoSlide);
+
+        startAutoSlide();
+        showSlide(currentIndex);
+    </script>
+</body>
+
+</html>
