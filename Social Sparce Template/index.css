@@ -1,15 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Signika&display=swap");
 :root {
-  --primary-color: #000000;
-  --second-color: #e40000;
+  --primary-color: #e40000;
+  --second-color: #141414;
   --white: #ffffff;
   --dark: #506172;
   --bgcolor: #ffecec;
   --primary-font: "Poppins", sans-serif;
   --second-font: "Signika", sans-serif;
-  font-size: 30px;
   background-color: #000000;
-  color: white;
+  color: var(--white);
 }
 
 body, h1 {
@@ -26,9 +25,7 @@ h1 {
   font-size: 35px;
 }
 
-a,
-ol,
-ul {
+a, ol, ul {
   list-style: none;
 }
 
@@ -46,14 +43,13 @@ img {
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 15px;
 }
 
-.nav-inside,
-.nav-items {
-  height: 55px;
+.nav-inside, .nav-items {
+  height: 75px;
   min-height: 50px;
   display: flex;
   justify-content: space-between;
@@ -63,7 +59,7 @@ img {
 
 .navbar-brand img {
   max-width: 300px;
-  max-height: 65px;
+  max-height: 80px;
 }
 
 .navbar-toggler {
@@ -82,33 +78,49 @@ img {
 }
 
 .navbar-nav .nav-item .nav-link {
-  font-size: 22px;
+  font-size: 20px;
   padding: 0 0.3rem;
+  color: var(--white);
+  transition: color 0.2s, transform 0.2s;
+  display: inline-block;
 }
 
-@media only screen and (max-width: 1024px) {
-  .newsletter .title,
-  .newsletter form {
-    width: 100%;
-    text-align: center;
-  }
-  .newsletter .form-row {
-    justify-content: center;
-    margin-top: 20px;
-  }
-  .main-slider,
-  .slick-track .carousel-item {
-    height: 450px;
-  }
+.navbar-nav .nav-item .nav-link:hover {
+  color: var(--primary-color);
+  transform: scale(1.1);
 }
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: var(--second-color);
+  min-width: 200px;
+  z-index: 1;
+  padding: 10px 0;
+  border-radius: 5px;
+}
+
+.nav-item:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-item {
+  padding: 10px 20px;
+  color: var(--white);
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.2s;
+}
+
+.dropdown-item:hover {
+  background-color: var(--primary-color);
+}
+
 @media only screen and (max-width: 991px) {
-  .main-header,
-  .nav-inside,
-  .navbar-toggler {
+  .main-header, .nav-inside, .navbar-toggler {
     display: block;
   }
-  .nav-inside,
-  .nav-items {
+  .nav-inside, .nav-items {
     max-height: 80px;
   }
   .navbar-brand img {
@@ -162,6 +174,11 @@ img {
 }
 
 /* Main slider */
+.title {
+  font-size: 38px;
+  font-weight: 500;
+}
+
 .slider {
   position: relative;
   width: 100%;
@@ -184,14 +201,6 @@ img {
   justify-content: center;
   text-align: center;
   position: relative;
-}
-
-.slide img {
-  max-width: 100%;
-  height: auto;
-  position: relative;
-  z-index: -1;
-  filter: brightness(0.7);
 }
 
 .caption {
@@ -231,7 +240,7 @@ img {
      object-fit: cover;
   position: relative;
   z-index: -1;
-  filter: brightness(0.7);
+  filter: brightness(0.4);
 }
 
 /* Home About Section Here */
@@ -241,7 +250,22 @@ img {
 
 .Home-Title {
   text-align: center;
-  text-decoration: underline;
+}
+
+.underline {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.underline::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 100%;
+  height: 2.5px;
+  background-color: var(--primary-color);
 }
 
 .about-us-inside {
@@ -262,10 +286,73 @@ img {
   -o-object-fit: cover;
      object-fit: cover;
 }
+.about-us-img img {
+  border-radius: 10px;
+  box-shadow: 0 0 5px var(--primary-color);
+}
+
+p {
+  text-align: justify;
+  font-size: 20px;
+  line-height: 35px;
+}
 
 @media only screen and (max-width: 768px) {
   .about-us-content,
   .about-us-img {
     flex: auto;
   }
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 38px;
+  font-family: var(--primary-font);
+  line-height: 1.5;
+  margin: 0;
+  font-weight: 500;
+}
+
+.counter {
+  background-color: #000;
+  color: #fff;
+  padding: 50px 0;
+  text-align: center;
+}
+.counter .container {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.title {
+  margin-bottom: 30px;
+}
+
+.counter-inside {
+  width: calc(33.33% - 20px);
+  padding: 15px;
+  margin: 10px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.counter-inside:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.counter-count {
+  font-size: 36px;
+  color: #ff4500;
+  margin-bottom: 10px;
+}
+
+.counter-text {
+  font-size: 25px;
+  color: #fff;
 }/*# sourceMappingURL=index.css.map */
